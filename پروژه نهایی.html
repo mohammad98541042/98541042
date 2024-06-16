@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>فرم ثبت نام</title>
+  <link rel="stylesheet" href="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.css" />
+  <script type="text/javascript"
+    src="https://unpkg.com/@majidh1/jalalidatepicker/dist/jalalidatepicker.min.js"></script>
+  <link rel="stylesheet" href="aa.css" />
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f8f9fa;
+    }
+
+    .logo {
+      text-align: center;
+      position: absolute;
+      width: 100%;
+      top: 20px;
+      margin-bottom: 50px;
+    }
+
+    .logo img {
+      height: 100px;
+    }
+
+    .container {
+      display: flex;
+      width: 1300px;
+      background-color: #808080;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 120px;
+    }
+
+    .column {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .left-column {
+      background: url('image-url.jpg') no-repeat center center;
+      padding: 40px;
+      background-size: cover;
+    }
+
+    .right-column {
+      display: flex;
+      padding: 50px;
+      flex-direction: column;
+      align-items: flex-end;
+      text-align: end;
+    }
+
+    .right-column label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .right-column input {
+      margin-bottom: 20px;
+      width: 500px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 20px;
+      border: none;
+    }
+
+    .right-column input[type="submit"] {
+      background-color: #e1cb25;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="logo">
+    <img src="logo.png" alt="لوگو">
+  </div>
+  <div class="container">
+    <div class="column left-column">
+      <img src="درمان التهاب لثه بعد از روکش دندان.jpg" alt="پروژه">
+    </div>
+    <div class="column right-column">
+        <p>!با سلام خدمت مراجعه کنندگان کلینیک دندان پزشکی ماهان  <br>
+            .برای رزرو نوبت میتوانید از طریق فرم زیر اقدام کنید
+            </p>
+      <div id="form1">
+        <label for="name">نام و نام خانوادگی</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="age">سن</label>
+        <input type="number" id="age" name="age" required>
+
+        <label for="phone">شماره تلفن</label>
+        <input type="tel" id="phone" name="phone" required>
+
+        <label for="gender">جنسیت</label>
+        <select id="gender" name="gender" required>
+          <option value="male">مرد</option>
+          <option value="female">زن</option>
+        </select>
+        <br>
+        <br>
+        <input onclick="next()" type="submit" value="مرحله بعد">
+        <br>
+      </div>
+
+      <form id="form2" style="display: none;" action="/submit-form" method="post">
+        <label for="phone">انتخاب روز</label>
+        <br>
+        <input id="phone" data-jdp placeholder="تقویم" />
+        <label for="phone">انتخاب ساعت</label>
+        <br>
+        <input type="time" step="3600">
+        <br>
+        <br>
+        <input type="submit" value="ارسال">
+      </form>
+    </div>
+  </div>
+
+  <!-- <script>
+    jalaliDatepicker.startWatch({
+      dayRendering: function (dayOptions, input) {
+        return {
+          isHollyDay: dayOptions.month == 1 && dayOptions.day <= 4,
+          // isValid = false, امکان غیر فعال کردن روز
+          // className = "nowruz" امکان افزودن کلاس برای درج استایل به روز
+        };
+      },
+    });
+    jalaliDatepicker.startWatch(options);
+    jalaliDatepicker.show(input);
+    jalaliDatepicker.hide();
+    jalaliDatepicker.updateOptions(options);
+  </script> -->
+
+  <script>
+    function next() {
+      let name = document.getElementById("name").value;
+      let age = document.getElementById("age").value;
+      let phone = document.getElementById("phone").value;
+      let gender = document.getElementById("gender").value;
+
+      if (name == "" && age == "" && phone == "") {
+        alert("اطلاعات خود را کامل وارد کنید")
+      }
+      else {
+        document.getElementById("form1").style.display = "none";
+        document.getElementById("form2").style.display = "block";
+
+        jalaliDatepicker.startWatch({
+          dayRendering: function (dayOptions, input) {
+            return {
+              isHollyDay: dayOptions.month == 1 && dayOptions.day <= 4,
+              // isValid = false, امکان غیر فعال کردن روز
+              // className = "nowruz" امکان افزودن کلاس برای درج استایل به روز
+            };
+          },
+        });
+        jalaliDatepicker.startWatch(options);
+        jalaliDatepicker.show(input);
+        jalaliDatepicker.hide();
+        jalaliDatepicker.updateOptions(options);
+      }
+
+    }
+  </script>
+
+</body>
+
+</html>
